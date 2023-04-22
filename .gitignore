@@ -1,3 +1,4 @@
 .vscode/
 .tpm/
 .node_modules/
+logs/

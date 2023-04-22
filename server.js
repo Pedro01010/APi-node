@@ -1,13 +1,12 @@
-const express = require('express');
-const app = express();
-app.use ('/', (req, res) => {
-    res.send('hello, word');
+require('dotenv').config()
+require('module-alias/register')
+const mongoose = require('mongoose')
+const boot = require('@service/boot')
+const config = require('@config')
 
-});
-
-app.listen(4000, (err) =>{
-    if(err){
-        return console.log('erro')
-    }
-    console.log('iniciou em http://localhost:4000')
-})
+mongoose.connect(config.db.connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB')
+    boot()
+  })
+  .catch((error) => console.log('Error connecting to MongoDB', error));
